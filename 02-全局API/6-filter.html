@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ msg }}</h1>
+    <h2>{{ text | myFilter }}</h2>
+    <input type="text" v-model="text">
+  </div>
+  
+  <script>
+    // 在选项中使用
+    // let app = new Vue({
+    //   el: '#app',
+    //   data: {
+    //     msg: 'Vue.filter 过滤器',
+    //     text: ''
+    //   },
+    //   filters: {
+    //     myFilter: function (value) {// 这个形式参数就是对text的值过滤
+    //       return value.split('').reverse().join('');//返回替代原本的字符串  分别进行切割 反转 拼接数组
+    //     }
+    //   }
+    // })
+    let app = new Vue({
+      el: '#app',
+      data: {
+        msg:'Vue.filter 过滤器',
+        text: '',
+      }
+    })
+    // 在全局设置 Vue构造器
+    // vue.js:597 [Vue warn]: Failed to resolve filter: myFilter 有警告提示 但是可以运行
+    Vue.filter('myFilter', function (value) {
+      return '$' +value+ '刀';
+    })
+  
+  </script>  
+</body>
+</html>

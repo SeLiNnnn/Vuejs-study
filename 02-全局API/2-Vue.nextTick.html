@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  
+  <div id="app">{{ msg }}</div>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          msg: 'hello'
+        }        
+      }
+    });
+      // console.log(app); // app是个vue的对象 包含所有属性
+    app.msg = '你好';
+    Vue.nextTick(function () {
+      console.log('DOM更新了');
+    });
+    Vue.nextTick().then(() => {
+      console.log('DOM更新啦')
+    });
+  </script>
+
+
+</body>
+</html>

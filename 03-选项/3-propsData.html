@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  
+  <dream></dream>
+  <dream></dream>
+
+  <div id="app"></div>
+  <div id="box"></div>
+
+  <script>
+    let extend = Vue.extend({
+      template: '<h2><a :href="url"> {{ con }} - {{ num }} </a></h2>',//模板:只能放一个子节点 注意这里不能只写url 必须用:href绑定 否则只是个字符串
+      data() {
+        return {
+          con: 'extend',
+          url: 'https://www.baidu.com'
+        }
+      },
+      props:['num']
+    });
+    new extend({propsData:{num:12345}}).$mount('dream');// 实例化extend $mount挂载自定义标签dream
+    new extend({propsData:{num:12345}}).$mount('#box');//直接挂载id值 自动套用template模板
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  
+
+  <div id="app">
+    <h2>{{ msg }}</h2>
+    <em>{{ price }}</em>
+    <!-- <input type="button" value="add" @click="add(5)">传递实参5 每次加5 -->
+    <!-- <input type="button" value="add" @click="add"> -->
+    <!-- <input type="button" value="add" @click="add(5,$event)"> -->
+
+    <input type="button" value="在vue作用域下调用add函数" @click="add(5,$event)">
+
+    <!-- 组件中必须要使用@click.native 原生方法native才能调用并显示mouseEvent 否则没有反应 -->
+    <dream @click.native="add" title="在组件中调用方法"></dream>
+
+    <input type="text" value="this指向" @click="This">
+  </div>
+  <!-- 要在外部调用 才使用let vm = new Vue()  这里的this代表btn本身 -->
+  <button onclick="vm.add(5,this)">在外部调用vue的函数方法 在外部调用肯定要加括号add()</button>
+  
+
+  <script>
+    let dream = {
+      template: '<h2><button>{{ title }}</button></h2>',
+      props: ['title']// 使用props传递父组件的数据 使用数组来接收
+    }
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        price: 199,
+        msg: 'methods',
+      },
+      components: {
+        dream
+      },
+      methods: {
+        // add(n) {// 接收实参5
+          // console.log(this);// 一定要记住 this是vue的实例对象 里面已经包含了price了
+          // this.price++;
+          // this.price += n;// 每次+5
+
+
+        // }
+        // add(e) {
+        //   console.log(e);// 输出mouseEvent事件对象 里面有很多信息 注意@click="add"没有参数没有括号
+        // },
+        add(n,e) {
+          console.log(n,e);// n是5 e会输出mouseEvent的信息  比如坐标
+        },
+        This:() => {
+          console.log(this);// 一旦使用了=>函数 这里就不是一个域 this指向window 不使用 =>函数就是因为要获取vue实例
+        }
+      }
+    })
+    console.log(this);// 这里也是window
+  
+  </script>
+</body>
+</html>

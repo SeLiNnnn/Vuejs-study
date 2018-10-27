@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{ msg }}
+    <hr>
+    {{ temperature }} - {{ font }}
+    <br>
+    <input type="button" value="add" @click="add()">
+    <input type="button" value="reduce" @click="reduce()">
+  </div>
+
+
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+          msg: 'watch 观察者 监控数据的变化',
+          temperature: 15,
+          font: ''
+      },
+      methods: {
+        add() {
+          this.temperature ++;
+        },
+        reduce() {
+          this.temperature --;
+        }
+      },
+      watch: {// 监听变化
+        temperature (newVal, oldVal) {
+          console.log(newVal,oldVal);// 监听新值和上一个旧值
+          if( newVal>=30 ) {
+            this.font = '多游泳哈哈哈';
+          } else if ( newVal <= 10 ) {
+            this.font = '多穿点';
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

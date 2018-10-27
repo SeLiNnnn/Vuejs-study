@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  
+
+  <div id="app">
+    <h1>{{ msg }} - {{ price }}</h1>
+    <ol>
+      <!-- 注意 遍历数组别忘了加索引并绑定索引值来提升效率 -->
+      <li v-for="(item, index) in list" :key="index">{{ item.date }} - {{ item.title}} </li>
+    </ol>
+    <ol>
+      <li v-for="(item, index) in newsList" :key="index">{{ item.date }} - {{ item.title}}</li>
+    </ol>
+    <!-- 反转以后两条li都会修改 -->
+
+    {{ newPrice }}  <!-- 输出¥199元 -->
+  </div>
+  
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        price: 199,
+        msg: 'computed 主要作用是对原始数据 进行二次处理 例如：类型转换，大小写转换，排序，拼接',
+        list: [
+          {
+            title: '《刺客信条奥德赛》传奇动物超简单猎杀视频合集',
+            date: '2018-10-15'
+          },
+          {
+            title: '索尼PS5或实现向下兼容 这是索尼的新专利',
+            date: '2018-10-16'
+          },
+          {
+            title: '《绝地求生》最严反外挂手段确认 作弊玩家要凉凉！',
+            date: '2018-10-17'
+          }
+        ]
+      },
+      computed: {
+        newsList() {
+          return this.list = this.list.reverse();// 反转数组
+        },
+        newPrice() {
+          return ('¥'+this.price+'元');
+        }
+      }
+    })
+  
+  </script>
+</body>
+</html>

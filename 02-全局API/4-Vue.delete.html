@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">{{ msg }}
+        <ol>
+          <li v-for="item in arr">{{ item }}</li>
+        </ol>
+      </div>
+      <button onclick="add()"> 点击删除arr的数据 </button>
+
+  <script>
+      let app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            msg: 'hello',
+            arr: ['a', 'b', 'c']
+          }        
+        },
+        
+      });
+      function add() {
+        console.log(app.arr);
+        Vue.delete( app.arr , 2); // 删除目标target 索引值key 
+      };
+
+    
+  </script>
+</body>
+</html>

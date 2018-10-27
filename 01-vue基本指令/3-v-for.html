@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2 v-text="msg"></h2>
+    <hr>
+    <ol>
+      <li v-for="item in arr">{{ item }}</li>
+    </ol>
+    <ul>
+      <!-- 提升性能 绑定属性key 第一个li的index是0 可以通过index去获取li -->
+      <li v-for="(item, index) in arr" :key="index">{{ item }}</li>
+    </ul>
+    <hr>
+    <ul>
+      <li v-for="(item, index) in users" :key="index">name:{{ item.name }} age:{{ item.age }}</li>
+    </ul>
+    <hr>
+    <ul>
+      <li v-for="(value, key, index) in userName">key: {{ key }} value: {{ value }} index: {{ index }}</li>
+    </ul>
+    <hr>
+    <ul>
+      <!-- 789 456 123降序排列 -->
+      <li v-for="item in sortArr">{{ item }}</li>
+    </ul>
+   
+  </div>
+
+  <script src="../js/vue.js"></script>
+
+  <script>
+    
+    new Vue({// 实例化
+      el: '#app',
+      data: {
+        msg: 'v-for',// 循环 使用for in的循环结构: v-for='变量名 in 循环项' 
+        arr: [123, 456, 789],  
+        //遍历数组 使用item,index
+        users: [
+          {
+            name : 'selin',
+            age : 21
+          },
+          {
+            name : '阿飞',
+            age : 18
+          },
+          {
+            name : '乌拉',
+            age : 20
+          }
+
+        ],
+        //遍历对象 使用 value,key,index
+        userName: {
+          id : 1,
+          name : 'selinnn',
+          age : 21,
+          sex : '女'
+        }
+      },
+      computed: {//选项:el data computed 使用computed来排序
+        sortArr: function () {
+          return this.arr.sort(function (a, b) {// this指向vue这个对象
+            // return a-b;// 升序
+            return b-a;//降序
+          })
+        }
+      }
+    });
+
+  
+  </script>
+
+</body>
+</html>

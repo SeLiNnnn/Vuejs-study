@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{ num }}
+    <br>
+    <input type="button" value="add" @click="add">
+  </div>
+  <!-- 下面这个btn在vue的作用域外面 -->
+  <button onclick="newAdd()"></button>
+
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      // data: {
+      //   num: 123
+      // },
+      data() {// 对象写法或函数写法都可以 函数要有返回值 组件只接收function
+        return {
+          num: 123
+        }
+      },
+      methods: {
+        add() {
+          this.num++;
+        }
+      }
+      
+      
+    });
+    console.log(vm);// 有很多属性 包括num vm.$data.num 也可以得到num的值
+    function newAdd() {// 使用这种方法对其累加
+      vm.num++;
+    }
+  </script>
+</body>
+</html>

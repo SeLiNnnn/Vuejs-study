@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  
+
+  <div id="app">
+
+    <h2>{{ msg }} - {{ num }}</h2>
+    <hr>
+    <input type="button" value="add" @click="add">
+    
+  </div>
+  <input type="button" value="reduce" onclick="reduce()"> <br>
+  <input type="button" value="reduceOne" onclick="reduceOne()"> <br>
+  <input type="button" value="off" onclick="off()"> <br>
+  <script>
+  
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '实例方法/事件',
+        num: 0
+      },
+      methods: {
+        add() {
+          this.num ++;
+        }
+      }
+
+    })
+    
+    vm.$on('reduce', function () {// 事件名字 回调函数
+      this.num --;
+    });
+    function reduce() {
+      vm.$emit('reduce');// 点击后 通过emi发送reduce事件 on才可以监听到该事件
+    };
+
+    vm.$once('reduceOne', function () {// 使用once只触发一次
+      this.num --;
+    });
+    function reduceOne() {
+      vm.$emit('reduceOne');
+    };
+
+    function off() {
+      vm.$off('reduce');// 解除绑定以后 再点击就无法触发reduce了
+    };
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2> {{ msg }} -- ${ msg } </h2>
+  </div>
+  <script>
+    // 判断vue的版本号
+    console.log(Number(Vue.version.split('.')[0]));
+    let version = Number(Vue.version.split('.')[0]);
+    if (version === 2) {
+      console.log('Vue.js 是2.x版本');
+    } else if (version === 1) {
+      console.log('你使用的版本过低');
+    } else {
+      console.log('版本有问题');
+    }
+
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'version'
+      },
+      delimiters: ['${','}']// 重新定义插值符号为es6的写法 vue默认的插值符号就不能使用了
+    })
+  </script>
+</body>
+</html>

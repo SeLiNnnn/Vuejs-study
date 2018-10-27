@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .red {
+      color: red;
+    }
+    .blue {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2 v-text="msg"></h2>
+    <hr>
+    <!-- 返回r的值 -->
+    <h2 v-bind:class="red">{{ msg }}</h2>
+    <!-- <h2 v-bind:class="{blue:isBlue}">{{ msg }}</h2> -->
+    <!-- 接收判断 -->
+    <h2 :class="{blue:isBlue}">{{ msg }}</h2>
+    <h2 :class="{red, blue}">绑定对象</h2>
+    <h2 :class="[red, blue]">绑定数组</h2>
+    <h2 :class="isTrue?'red':'blue'">三元</h2>
+    <h2 :style="styleObj">绑定样式</h2>
+    <h2 :style="{color:color, border:border}">单独样式</h2>
+  </div>
+
+  <script src="../js/vue.js"></script>
+
+  <script>
+
+    // 响应式：页面数据发生改变 内存中的数据也改变 内存数据的改变也会影响页面数据的变化
+    
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'v-bind',
+        red: 'red',
+        isBlue: true,
+        blue: 'blue',
+        isTrue: true,
+        styleObj: {
+          color: 'green',
+          border: '1px solid #ccc'
+        },
+        color: 'skyblue',
+        border: '1px solid #999'
+      }
+    });
+
+  
+  </script>
+
+</body>
+</html>

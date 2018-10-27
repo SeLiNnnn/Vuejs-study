@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 把数据插入到app作用域下 需要用插值符号 {{变量}}  -->
+    {{ msg }}
+    <h2>{{ vText }}</h2>
+    <h1 v-text="vText"></h1>
+    <h3 v-html="vHtml"></h3>
+    <h4 v-show="isShow">{{ vHtml }}</h4>
+  </div>
+
+  <script src="../js/vue.js"></script>
+
+  <script>
+    
+    //vue是MVVM框架 模型-视图-试图模型
+    new Vue({// 实例化
+      el: '#app',// element 关联元素
+      data: {//假设这是从后台请求来的原始数据 都会放到data
+        msg: 'hello vue',
+        vText: '这是v-text 相当于innerText',
+        vHtml: '<em>这是v-html 可以解析标签</em>',
+        isShow: false// v-show用于接收一个布尔值 表示是否显示或隐藏 隐藏时使用display:none
+
+      }
+    });
+
+  
+  </script>
+
+</body>
+</html>

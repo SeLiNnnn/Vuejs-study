@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../js/vue.js"></script>
+  <title>Document</title>
+  
+</head>
+<body>
+    <div id="app">
+      <hd-nav title="商品列表" main-title="主标题" :alt="msg"></hd-nav>
+    </div>
+   
+    <script>
+      let child = {
+        template: `<em> child子组件 </em>`
+      }
+      let parent = {
+        template: `
+          <h2>选项组件 - {{ title }} 
+            <child></child>  
+          </h2>
+        `,
+        props: {
+          title: {// 数据模型
+            type:String,
+            default: '',
+            required: true,
+            validator: function (value) {
+              return value;// 原样返回即可
+            }
+          }
+        },
+        components: {// 引用子组件 先声明
+          child: child
+        }
+      }
+      
+      
+
+      new Vue({
+        el: '#app',
+        data: {
+          msg: 'seo'
+        },
+        components:{
+          hdNav: parent
+        }
+      })
+  
+    </script>
+</body>
+</html>

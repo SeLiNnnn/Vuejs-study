@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 09年得angular就是这样的书写习惯 全部小写 如果是hd-Nav也可以 但必须用-隔开 一般都是小写 -->
+    <hd-nav></hd-nav>
+   
+
+  </div>
+
+  <script>
+    // 组件就像公共样式 可以在任何vue作用域下复用
+    // 全局组件
+    Vue.component(
+      'hdNav',//组件名称 驼峰命名法 使用-也可以 但不利于js的解析 类比backgroundColor就能明白了
+      {
+        template: '<h2 style="color: skyblue">全局组件</h2>'
+      }
+    )
+    new Vue({
+      el: '#app'
+    })
+
+
+  </script>
+
+</body>
+</html>

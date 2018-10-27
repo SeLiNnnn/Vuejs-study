@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h2> {{ msg }} - {{ num }} </h2>
+    <input type="button" v-on:click="add" value="add">
+  </div>
+
+  <script>
+    let addLog = {
+      updated() {
+        console.log('选项的混入')
+      }
+    }
+
+    Vue.mixin({
+      updated(){
+        console.log('全局的混入');
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'Vue.mixin',
+        num: 0
+      },
+      methods:{
+        add(){
+          this.num ++;
+        }
+      },
+      updated() {
+        console.log('自身的生命周期 钩子函数');// 全局的混入先触发 再触发选项的 最后触发原生的钩子
+      },
+      mixins: [addLog]
+    })
+  </script>
+</body>
+</html>

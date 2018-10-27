@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../js/vue.js"></script>
+  <title>Document</title>
+  
+</head>
+<body>
+    <div id="app">
+      <hd-nav title="商品列表" main-title="主标题" :alt="msg"></hd-nav>
+      <!-- hd-nav用template 所以是父组件  注意这里的main-title有-隔开 -->
+    </div>
+   
+    <script>
+      // 谁使用 -- 父组件
+      // 谁被用 -- 子组件
+      new Vue({
+        el: '#app',
+        data: {
+          msg: 'seo'
+        },
+        components:{
+          hdNav:{
+            template: `<h2>选项组件 - {{ title }} -{{ mainTitle }} - {{ alt }} </h2>`, // 子组件 注意要使用驼峰命名法
+            // props 用于接收父组件的数据
+            props:['title', 'mainTitle', 'alt']
+          }
+        }
+      })
+  
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">{{ msg }}
+      <ol>
+        <li v-for="item in arr">{{ item }}</li>
+      </ol>
+    </div>
+    <button onclick="add()"> 点击修改arr的数据 </button>
+
+    <script>
+      let app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            msg: 'hello',
+            arr: ['a', 'b', 'c']
+          }        
+        },
+        
+      });
+      function add() {
+        // app.arr[2] = 123; // 可以修改arr里的值 但无法响应到页面中 同一个作用域才能同步 所以需要使用Vue.set
+        console.log(app.arr);//点击拿到arr数组
+        Vue.set( app.arr , 2, 456 ); // 修改目标target 索引值key 修改值value
+      };
+
+    
+  </script>
+
+
+
+</body>
+</html>

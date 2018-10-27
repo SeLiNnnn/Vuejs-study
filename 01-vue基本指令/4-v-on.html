@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2 v-text="msg"></h2>
+    <hr>
+    <h1> 得分: {{ num }} </h1>
+    <!-- <button v-on:click="addition">加分</button> -->
+    <button @click="addition">加分</button>
+    <button v-on:click="subtraciton">减分</button>
+    <hr>
+    双向数据绑定:<em v-text="num"></em>
+    <input v-model="num" v-on:keyup.enter="onEnter" placeholder="键盘事件">
+    <!-- <input v-on:keyup.enter="onEnter" placeholder="键盘事件">   -->
+    <input v-on:keyup.13="onEnter" value="键盘事件"><!-- keyup.13 中的13是键值 可以去监听键值 -->
+  </div>
+
+  <script src="../js/vue.js"></script>
+
+  <script>
+
+    // 响应式：页面数据发生改变 内存中的数据也改变 内存数据的改变也会影响页面数据的变化
+    
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'v-on',
+        num : 0
+      },
+      methods: {
+        addition: function (e) {//在event里有该被点击对象的坐标
+          // console.log(e, this);
+          this.num ++;
+        },
+        subtraciton() {
+          // console.log(this); this指向vue
+          this.num --;
+        },//推荐使用这样的es6语法
+        onEnter(){
+          this.num ++;
+        }
+      }
+    });
+
+  
+  </script>
+
+</body>
+</html>

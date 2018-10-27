@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+      <h1>{{ msg }}</h1>
+      <h2 v-dream="custom">{{ msg }} - {{ num }}</h2>
+      <h2 v-coutom="info">{{ msg }} - {{ num }}</h2>
+      <button @click="add"> 点击改变num </button>
+    </div>
+    <button onclick="unbind()">解绑</button>
+        
+
+    <script>
+      function unbind() {
+        app.$destroy();
+      }
+
+      Vue.directive('dream', function (el, bind) {//定义指令dream 在回调函数中说明指令的用法
+        console.log( el );//使用该指令的元素 h2
+        console.log(bind);
+        el.style = 'color:' + bind.value;//通过console可以看到 颜色需绑定要value上
+      });
+      //注册指令
+      Vue.directive('coutom', {
+        // 事件函数 -> 钩子
+        bind: function () {
+          console.log('1. 被绑定');
+        },
+        inserted: function (el ,bind) {
+          console.log('2. 绑定到节点');
+          el.style.color = bind.value;
+        },
+        update: function () {
+          console.log('3. 组件更新');
+        },
+        componentUpdated: function () {
+          console.log('4. 组件更新完成');
+        },
+        unbind: function () {
+          console.log('5. 解绑');
+        }
+      })
+      let app = new Vue({
+          el: '#app',
+          data: {
+            msg: 'Vue.directive',
+            custom: 'hotpink',//定义变量custom
+            info: 'blue',
+            num: 0
+          },
+          methods: {
+            add(){
+              this.num ++;
+            }
+          }
+      });
+      
+    </script>
+  
+</body>
+</html>

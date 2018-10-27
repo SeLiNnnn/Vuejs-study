@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../js/vue.js"></script>
+  <title>Document</title>
+  
+</head>
+<body>
+    <div id="app">
+      <h2>{{ msg }}</h2>
+      <!--根据值的不同显示不同的组件-->
+      <component :is="componentA"></component>
+      <component :is="componentB"></component>
+      <component :is="componentC"></component>
+      <hr>
+      <component :is="toggleComponent"></component>
+      <button @click="toggle">切换component组件</button>
+    </div>
+   
+    <script>
+      // 在外部声明组件
+      let componentA = {
+        template: `<h2 style="color: orangered">组件A</h2>`
+      }
+      let componentB = {
+        template: `<h2 style="color: yellowgreen">组件B</h2>`
+      }
+      let componentC = {
+        template: `<h2 style="color: skyblue">组件C</h2>`
+      }
+      new Vue({
+        el: '#app',
+        data: {
+          msg: 'component标签',
+          componentA:componentA,
+          componentB,
+          componentC,
+          toggleComponent:componentA,
+          arr: [
+            componentA,
+            componentB,
+            componentC
+          ]
+        },
+        components: {
+          componentA:componentA,
+          componentB,//es6中的简写 和上面一行等价
+          componentC,
+        },
+        methods: {// 声明类似@click等的函数
+          toggle() {
+            console.log(this);// 点击返回vue的实例
+            this.toggleComponent = this.arr[Math.floor(Math.random()*3)];//生成0-3的随机数 并向下取整
+          }
+        }
+      })
+  
+    </script>
+</body>
+</html>

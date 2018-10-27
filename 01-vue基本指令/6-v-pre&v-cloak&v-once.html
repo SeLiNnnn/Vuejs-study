@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .red {
+      color: red;
+    }
+    .blue {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2 v-text="msg"></h2>
+    <hr>
+    <!--不需要表达式 跳过这个元素和它的子元素的编译过程。可以用来显示原始 Mustache 标签。跳过大量没有指令的节点会加快编译-->
+    <!-- {{ msg }}不会被编译 -->
+    <div v-pre="msg">{{ msg }}</div>
+    <div v-pre>{{ this will not be compiled }}</div>
+    <div v-cloak>不会显示直到编译结束</div>
+    <h2 v-once> {{ msg }} </h2>
+    <input type="text" v-model="msg"> <br>
+    <em>input值的改变会影响msg 但使用v-once的只渲染一次 不会再改变</em>
+
+  </div>
+
+  <script src="../js/vue.js"></script>
+
+  <script>
+
+   
+    
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'v-pre&v-cloak&v-once',
+        
+        }
+    });
+
+  
+  </script>
+
+</body>
+</html>

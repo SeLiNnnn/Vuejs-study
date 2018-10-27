@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../js/vue.js"></script>
+  <title>Document</title>
+  
+</head>
+<body>
+    <div id="app">
+      <hd-nav title="商品列表" main-title="主标题" :alt="msg"></hd-nav>
+    </div>
+   
+    <script>
+      let child = {
+        template: `<em> child子组件 </em>`
+      }
+      let parent = {// 这里必须写mainTitle 如果写main-Title会报错 出现NaN 认为是两个变量相减
+        template: `
+          <h2>选项组件 - {{ title }} -{{ mainTitle }} - {{ alt }} 
+            <child></child>  
+          </h2>
+        `,// template里只能有一个子元素
+        props:['title', 'mainTitle', 'alt'],// 使用props进行数据传递
+        components: {// 引用子组件 先声明
+          child: child
+        }
+      }
+      
+      
+
+      new Vue({
+        el: '#app',
+        data: {
+          msg: 'seo'
+        },
+        components:{
+          hdNav: parent
+        }
+      })
+  
+    </script>
+</body>
+</html>
